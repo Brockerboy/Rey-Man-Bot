@@ -51,7 +51,7 @@ function respond() {
   }   
   else if(request.text && botKnockKnock.test(request.text)) {
     this.res.writeHead(200);
-    delay(1000);
+    delay(5);
     postMessage("Who's there?");
     this.res.end();
   }  
