@@ -7,6 +7,7 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botHello = /^\/rey hello$/;
       botJoke = /^\/rey joke/;
+      botMotivation = /^\/rey motivation/;
 
   if(request.text && botHello.test(request.text)) {
     this.res.writeHead(200);
@@ -16,6 +17,11 @@ function respond() {
   else if(request.text && botJoke.test(request.text)) {
     this.res.writeHead(200);
     postMessage("https://i.chzbgr.com/full/5035524864/h25BCA081/");
+    this.res.end();
+  } 
+  else if(request.text && botMotivation.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("DON'T LET YOUR DREAMS BE DREAMS!\n JUST DO IT");
     this.res.end();
   } 
   else {
