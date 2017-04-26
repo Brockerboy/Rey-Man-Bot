@@ -28,7 +28,16 @@ function respond() {
   }
   else if(request.text && botJoke.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("https://i.chzbgr.com/full/5035524864/h25BCA081/");
+    var jokeArray = [
+        'Joke1',
+        'Joke2',
+        'Joke3'
+    ];
+    
+    var randomIndex = Math.floor(Math.random() * jokeArray.length); 
+    var randomJoke = jokeArray[randomIndex];
+    
+    postMessage(randomJoke);
     this.res.end();
   } 
   else if(request.text && botMotivation.test(request.text)) {
