@@ -20,7 +20,8 @@ function respond() {
                     + '/rey hello - Greets you \n'
                     + '/rey cool - Prints random text face\n'
                     + '/rey joke - Tells a random joke \n'
-                    + '/rey motivation - Pumps you up \n');
+                    + '/rey motivation - Pumps you up \n'
+                    + '/rey QT? - Responds to question \n');
     this.res.end();
   }
   else if(request.text && botHello.test(request.text)) {
