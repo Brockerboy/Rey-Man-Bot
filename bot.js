@@ -12,6 +12,7 @@ function respond() {
       botHelp = /^\/rey help/; //prints random text face
       botFlightSchool = /^\/rey How's flight school going?/; //prints flight school response
       botQT = /^\/rey QT?/; //prints QT response
+      botKnockKnock = /^\/rey Knock knock/; //prints Who's there?
 
   if(request.text && botHelp.test(request.text)) {
     this.res.writeHead(200);
@@ -48,6 +49,12 @@ function respond() {
     postMessage("DON'T LET YOUR DREAMS BE DREAMS!\nJUST GOTTA DO IT");
     this.res.end();
   }   
+  else if(request.text && botKnockKnock.test(request.text)) {
+    this.res.writeHead(200);
+    delay(1000);
+    postMessage("Who's there?");
+    this.res.end();
+  }  
   else if(request.text && botQT.test(request.text)) {
     this.res.writeHead(200);
     postMessage("I can't tonight. Chris, can you get me some sunflower seeds though?");
