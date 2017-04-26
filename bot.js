@@ -9,12 +9,12 @@ function respond() {
       botJoke = /^\/rey joke/; //tells random joke
       botMotivation = /^\/rey motivation/; //prints motivational phrase
       botCool = /^\/rey cool/; //prints random text face
-      botCommands = /^\/rey commands/; //prints random text face
+      botHelp = /^\/rey help/; //prints random text face
 
-  if(request.text && botCommands.test(request.text)) {
+  if(request.text && botHelp.test(request.text)) {
     this.res.writeHead(200);
     postMessage('List of commands (All commands start with "/rey"): \n'
-                    + '/rey commands - Prints this list \n'
+                    + '/rey help - Prints this list \n'
                     + '/rey hello - Greets you \n'
                     + '/rey cool - Prints random text face\n'
                     + '/rey joke - Tells a random joke \n'
