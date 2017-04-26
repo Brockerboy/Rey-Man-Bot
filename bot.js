@@ -11,7 +11,7 @@ function respond() {
                 "MIA","BUF","SF","WAS","NYJ","TB"]
   if(request.text && botHiRey.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("Hi Rey!");
+    postMessage("I'd love to say hi but you are disturbing me while I'm preying!");
     this.res.end();
   }
   else if(request.text && botRegexSlut.test(request.text)) {
