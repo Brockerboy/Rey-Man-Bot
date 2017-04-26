@@ -9,7 +9,7 @@ function respond() {
 
   if(request.text && botHello.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("Hello!");
+    postMessage("Man y'all are pretty swaggy for saying hi to me!");
     this.res.end();
   } else {
     console.log("don't care");
