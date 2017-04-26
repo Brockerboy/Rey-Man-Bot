@@ -5,11 +5,23 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botHello = /^\/rey hello$/;
-      botJoke = /^\/rey joke/;
-      botMotivation = /^\/rey motivation/;
+      botHello = /^\/rey hello$/; //Says hi in a friendly voice!
+      botJoke = /^\/rey joke/; //tells random joke
+      botMotivation = /^\/rey motivation/; //prints motivational phrase
+      botCool = /^\/rey cool/; //prints random text face
+      botCommands = /^\/rey commands/; //prints random text face
 
-  if(request.text && botHello.test(request.text)) {
+  if(request.text && botCommands.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage('List of commands (All commands start with "/rey"): \n'
+                    + '/rey commands - Prints this list \n'
+                    + '/rey hello - Greets you \n'
+                    + '/rey cool - Prints random text face\n'
+                    + '/rey joke - Tells a random joke \n'
+                    + '/rey motivation - Pumps you up \n');
+    this.res.end();
+  }
+  else if(request.text && botHello.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Man y'all are pretty swaggy for saying hi to me!");
     this.res.end();
@@ -21,7 +33,12 @@ function respond() {
   } 
   else if(request.text && botMotivation.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("DON'T LET YOUR DREAMS BE DREAMS!\n JUST DO IT");
+    postMessage("DON'T LET YOUR DREAMS BE DREAMS!\nJUST DO IT");
+    this.res.end();
+  } 
+  else if(request.text && botCool.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage(cool());
     this.res.end();
   } 
   else {
