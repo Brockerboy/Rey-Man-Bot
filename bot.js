@@ -10,6 +10,8 @@ function respond() {
       botMotivation = /^\/rey motivation/; //prints motivational phrase
       botCool = /^\/rey cool/; //prints random text face
       botHelp = /^\/rey help/; //prints random text face
+      botFlightSchool = /^\/rey How's flight school going?/; //prints flight school response
+      botQT = /^\/rey QT?/; //prints QT response
 
   if(request.text && botHelp.test(request.text)) {
     this.res.writeHead(200);
@@ -42,7 +44,17 @@ function respond() {
   } 
   else if(request.text && botMotivation.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("DON'T LET YOUR DREAMS BE DREAMS!\nJUST DO IT");
+    postMessage("DON'T LET YOUR DREAMS BE DREAMS!\nJUST GOTTA DO IT");
+    this.res.end();
+  }   
+  else if(request.text && botQT.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("I can't tonight. Chris, can you get me some sunflower seeds though?");
+    this.res.end();
+  } 
+  else if(request.text && botFlightSchool.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("Flight School is awesome!!!\nI learned about aerodynamics today. Only hit one building too.");
     this.res.end();
   } 
   else if(request.text && botCool.test(request.text)) {
