@@ -6,12 +6,19 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botHello = /^\/rey hello$/;
+      botJoke = /^\/rey joke/;
 
   if(request.text && botHello.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Man y'all are pretty swaggy for saying hi to me!");
     this.res.end();
-  } else {
+  }
+  else if(request.text && botJoke.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("https://i.chzbgr.com/full/5035524864/h25BCA081/");
+    this.res.end();
+  } 
+  else {
     console.log("don't care");
     this.res.writeHead(200);
     this.res.end();
