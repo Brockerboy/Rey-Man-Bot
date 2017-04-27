@@ -13,6 +13,7 @@ function respond() {
       botFlightSchool = /^\/rey How's flight school going?/; //prints flight school response
       botQT = /^\/rey QT?/; //prints QT response
       botKnockKnock = /^\/rey Knock knock/; //prints Who's there?
+      botCards = /^\/rey cards/; //Responds to question
 
   if(request.text && botHelp.test(request.text)) {
     this.res.writeHead(200);
@@ -48,7 +49,12 @@ function respond() {
     this.res.writeHead(200);
     postMessage("DON'T LET YOUR DREAMS BE DREAMS!\nJUST GOTTA DO IT");
     this.res.end();
-  }   
+  }  
+  else if(request.text && botCards.test(request.text)) {
+    this.res.writeHead(200);
+    postMessage("Lol I don't know how to play cards. I'll play Go Fish though. I LOVE fish. LITERALLY");
+    this.res.end();
+  } 
   else if(request.text && botKnockKnock.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Who's there?");
