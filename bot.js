@@ -24,7 +24,8 @@ function respond() {
                     + '/rey cool - Prints random text face\n'
                     + '/rey joke - Tells a random joke \n'
                     + '/rey motivation - Pumps you up \n'
-                    + '/rey QT? - Responds to question \n');
+                    + '/rey QT? - Responds to question \n'
+                    + '/rey 8ball "question" - Consult an magic 8 ball to decide your fate to any question \n');
     this.res.end();
   }
   else if(request.text && botHello.test(request.text)) {
