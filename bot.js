@@ -58,7 +58,7 @@ function respond() {
       'Youve Got To Be Kidding...',
       'Not A Chance',
       'As I See It Yes',
-      'Serai said no to chris, so I say no to you',
+      'Serai said no to Chris, so I say no to you',
       'What Do You Think?',
       'Duh',
       'Focus And Ask Again',
@@ -75,7 +75,8 @@ function respond() {
       'Concentrate and Ask Again',
       'NO',
       'Yes',
-      'Better Not Tell You Now'
+      'Better Not Tell You Now',
+      'What was that?'
     ];
     
     var randomIndex = Math.floor(Math.random() * ball8Array.length); 
@@ -106,7 +107,7 @@ function respond() {
   } 
   else if(request.text && botFlightSchool.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("Flight School is awesome!!!\nI learned about aerodynamics today. Only hit one building too.");
+    postMessage("Fantastic!!!\nI graduated summa cum laude!\nI also minored in Hospital Management and also Underwater Basket Weaving.");
     this.res.end();
   } 
   else if(request.text && botCool.test(request.text)) {
