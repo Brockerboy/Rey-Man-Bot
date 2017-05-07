@@ -51,6 +51,18 @@ function respond() {
     this.res.writeHead(200);
     var ball8Array = [
       'Absolutely',
+      'Prospect Good',
+      'Consult Me Later',
+      'Well Maybe',
+      'You Wish',
+      'Youve Got To Be Kidding...',
+      'Not A Chance',
+      'As I See It Yes',
+      'Serai said no to chris, so I say no to you',
+      'What Do You Think?',
+      'Duh',
+      'Focus And Ask Again',
+      'Obviously',
       'Answer Unclear Ask Later',
       'Chances Are not Good',
       'Dont Count On It',
