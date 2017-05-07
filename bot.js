@@ -14,6 +14,7 @@ function respond() {
       botQT = /^\/rey QT?/; //prints QT response
       botKnockKnock = /^\/rey Knock knock/; //prints Who's there?
       botCards = /^\/rey cards/; //Responds to question
+      bot8Ball = /^\/rey 8ball/; //Responds to question with 8 ball response
 
   if(request.text && botHelp.test(request.text)) {
     this.res.writeHead(200);
@@ -41,6 +42,31 @@ function respond() {
     
     var randomIndex = Math.floor(Math.random() * jokeArray.length); 
     var randomJoke = jokeArray[randomIndex];
+    
+    postMessage(randomJoke);
+    this.res.end();
+  } 
+  else if(request.text && bot8Ball.test(request.text)) {
+    this.res.writeHead(200);
+    var ball8Array = [
+      'Absolutely',
+      'Answer Unclear Ask Later',
+      'Chances Are not Good',
+      'Dont Count On It',
+      'Outlook Not So Good',
+      'Most Likely',
+      'Without A Doubt',
+      'Absolutely',
+      'Yes - Definitely',
+      'Dont get too excited',
+      'Concentrate and Ask Again',
+      'NO',
+      'Yes',
+      'Better Not Tell You Now'
+    ];
+    
+    var randomIndex = Math.floor(Math.random() * ball8Array.length); 
+    var randomJoke = ball8Array[randomIndex];
     
     postMessage(randomJoke);
     this.res.end();
