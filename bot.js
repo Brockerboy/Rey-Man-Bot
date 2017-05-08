@@ -76,7 +76,8 @@ function respond() {
       'NO',
       'Yes',
       'Better Not Tell You Now',
-      'What was that?'
+      'What was that?',
+      'Porque no los dos?'
     ];
     
     var randomIndex = Math.floor(Math.random() * ball8Array.length); 
@@ -102,7 +103,7 @@ function respond() {
   }  
   else if(request.text && botQT.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("I can't tonight. Chris, can you get me some sunflower seeds though?");
+    postMessage("QTTTTTTTTTTTTTTTTTTTT");
     this.res.end();
   } 
   else if(request.text && botFlightSchool.test(request.text)) {
