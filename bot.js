@@ -14,7 +14,7 @@ function respond() {
       botQT = /^\/rey QT?/; //prints QT response
       botKnockKnock = /^\/rey Knock knock/; //prints Who's there?
       botCards = /^\/rey cards/; //Responds to question
-      botTennis = /^\/rey yoyoyoTennis!/; //Responds to question
+      botTennis = /^\/rey yoyoyoTennis/; //Responds to question
       bot8Ball = /^\/rey 8ball/; //Responds to question with 8 ball response
 
   if(request.text && botHelp.test(request.text)) {
