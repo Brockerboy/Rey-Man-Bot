@@ -96,6 +96,7 @@ function respond() {
     this.res.writeHead(200);
     postMessage("Lol I don't know how to play cards. I'll play Go Fish though. I LOVE fish. LITERALLY");
     this.res.end();
+  }
   else if(request.text && botTennis.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Hey everyone! We are playing tennis tomorrow at Cosmo around 4:30 to 5. Be there or be square. Let me know if you can go. Or not. You can go either way. But I want you to be there.\n    -Rey");
