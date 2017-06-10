@@ -36,16 +36,29 @@ function respond() {
   }
   else if(request.text && botJoke.test(request.text)) {
     this.res.writeHead(200);
+    
     var jokeArray = [
-        'Joke1',
-        'Joke2',
-        'Joke3'
+        'Why did the mantis cross the road',
+        'Tonight I dreamed of a beautiful walk on a sandy beach',
+        'What did the husband preying mantis say to his wife?'
+    ];
+    
+    var punchLineArray = [
+        'to get to the other side.',
+        'At least that explains the footprints I found in the cat litter box this morning.',
+        'Your eating in bed is getting really out of hand!'
     ];
     
     var randomIndex = Math.floor(Math.random() * jokeArray.length); 
     var randomJoke = jokeArray[randomIndex];
+    var punchline = punchLineArray[randomIndex];
     
     postMessage(randomJoke);
+    
+    setTimeout(function(){
+        postMessage(punchline);
+    }, 5000);
+    
     this.res.end();
   } 
   else if(request.text && bot8Ball.test(request.text)) {
