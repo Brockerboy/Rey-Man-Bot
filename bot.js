@@ -89,7 +89,7 @@ function respond() {
   } 
   else if(request.text && botMotivation.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("DON'T LET YOUR DREAMS BE DREAMS!\nJUST GOTTA DO IT");
+    postMessage("https://i.groupme.com/898x555.png.b18ab75a62074b47a764d4d0e36572dc.large");
     this.res.end();
   }  
   else if(request.text && botCards.test(request.text)) {
