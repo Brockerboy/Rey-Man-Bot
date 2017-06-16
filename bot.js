@@ -18,7 +18,7 @@ function respond() {
       botCards = /^\/rey cards/; //Responds to question
       botTennis = /^\/rey yoyoyoTennis/; //Responds to question
       bot8Ball = /^\/rey 8ball/; //Responds to question with 8 ball response
-      giphyCommand = '/giphy';
+      giphyCommand = /^\/giphy/;
     
 
   if(request.text && botHelp.test(request.text)) {
@@ -182,7 +182,7 @@ function searchGiphy(giphyToSearch) {
 }
 
 function encodeQuery(query) {
-  return query.replace(/\s/g, '+');;
+  return query.replace(/\s/g, '+');
 }
 
 
