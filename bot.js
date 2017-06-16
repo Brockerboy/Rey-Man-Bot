@@ -1,7 +1,9 @@
 var HTTPS = require('https');
+var HTTP = require('http');
 var cool = require('cool-ascii-faces');
 
 var botID = process.env.BOT_ID;
+var apiKey = process.env.API_KEY;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
@@ -16,6 +18,8 @@ function respond() {
       botCards = /^\/rey cards/; //Responds to question
       botTennis = /^\/rey yoyoyoTennis/; //Responds to question
       bot8Ball = /^\/rey 8ball/; //Responds to question with 8 ball response
+      giphyCommand = '/giphy';
+    
 
   if(request.text && botHelp.test(request.text)) {
     this.res.writeHead(200);
@@ -134,6 +138,13 @@ function respond() {
     this.res.writeHead(200);
     postMessage(cool());
     this.res.end();
+  }
+  else if(request.text &&
+     request.text.length > giphyCommand.length &&
+     request.text.substring(0, giphyCommand.length) === giphyCommand) {
+    this.res.writeHead(200);
+    searchGiphy(request.text.substring(giphyCommand.length + 1));
+    this.res.end();
   } 
   else {
     console.log("don't care");
@@ -141,6 +152,42 @@ function respond() {
     this.res.end();
   }
 }
+
+
+function searchGiphy(giphyToSearch) {
+  var options = {
+    host: 'api.giphy.com',
+    path: '/v1/gifs/search?q=' + encodeQuery(giphyToSearch) + '&api_key=' + apiKey
+  };
+
+  var callback = function(response) {
+    var str = '';
+
+    response.on('data', function(chunck){
+      str += chunck;
+    });
+
+    response.on('end', function() {
+      if (!(str && JSON.parse(str).data[0])) {
+        postMessage('Couldn\'t find a gif 💩');
+      } else {
+        var id = JSON.parse(str).data[0].id;
+        var giphyURL = 'http://i.giphy.com/' + id + '.gif';
+        postMessage(giphyURL);
+      }
+    });
+  };
+
+  HTTP.request(options, callback).end();
+}
+
+function encodeQuery(query) {
+  return query.replace(/\s/g, '+');;
+}
+
+
+
+
 
 function postMessage(response) {
   var botResponse, options, body, botReq;
