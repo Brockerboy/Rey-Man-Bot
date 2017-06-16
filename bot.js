@@ -139,13 +139,13 @@ function respond() {
     postMessage(cool());
     this.res.end();
   }
-  else if(request.text &&
-     request.text.length > giphyCommand.length &&
-     request.text.substring(0, giphyCommand.length) === giphyCommand) {
+  else if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
     this.res.writeHead(200);
     searchGiphy(request.text.substring(giphyCommand.length + 1));
+    postMessage("test");
     this.res.end();
   } 
+
   else {
     console.log("don't care");
     this.res.writeHead(200);
