@@ -1,8 +1,27 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Gist
+ @Brockerboy
+ Sign out
+ Watch 0
+  Star 0
+  Fork 385 Brockerboy/Rey-Man-Bot
+forked from batorobe/bot-tutorial-nodejs-rMA32
+ Code  Pull requests 0  Projects 0  Wiki  Settings Insights 
+Tree: 6ee9e72717 Find file Copy pathRey-Man-Bot/bot.js
+6ee9e72  7 days ago
+@Brockerboy Brockerboy Create bot.js
+4 contributors @batorobe @Brockerboy @michaelmph @petemcgrath
+RawBlameHistory      
+182 lines (161 sloc)  5.75 KB
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
 
 var botID = process.env.BOT_ID;
-var apiKey = process.env.API_KEY;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
@@ -17,8 +36,6 @@ function respond() {
       botCards = /^\/rey cards/; //Responds to question
       botTennis = /^\/rey yoyoyoTennis/; //Responds to question
       bot8Ball = /^\/rey 8ball/; //Responds to question with 8 ball response
-      giphyCommand = /^\/giphy/;
-    
 
   if(request.text && botHelp.test(request.text)) {
     this.res.writeHead(200);
@@ -125,7 +142,7 @@ function respond() {
   }  
   else if(request.text && botQT.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("apiKey");
+    postMessage("QTTTTTTTTTTTTTTTTTTTT");
     this.res.end();
   } 
   else if(request.text && botFlightSchool.test(request.text)) {
@@ -137,23 +154,13 @@ function respond() {
     this.res.writeHead(200);
     postMessage(cool());
     this.res.end();
-  }
-  else if(request.text && request.text.length > giphyCommand.length && request.text.substring(0, giphyCommand.length) === giphyCommand) {
-    this.res.writeHead(200);
-    searchGiphy(request.text.substring(giphyCommand.length + 1));
-    postMessage("test");
-    this.res.end();
   } 
   else {
-    // console.log("don't care");
+    console.log("don't care");
     this.res.writeHead(200);
     this.res.end();
   }
-
-
-
-
-
+}
 
 function postMessage(response) {
   var botResponse, options, body, botReq;
@@ -192,3 +199,6 @@ function postMessage(response) {
 
 
 exports.respond = respond;
+1
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
