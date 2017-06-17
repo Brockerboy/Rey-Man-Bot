@@ -1,6 +1,5 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
-var request = require('request');
 
 var botID = process.env.BOT_ID;
 var apiKey = process.env.API_KEY;
@@ -19,7 +18,6 @@ function respond() {
       botTennis = /^\/rey yoyoyoTennis/; //Responds to question
       bot8Ball = /^\/rey 8ball/; //Responds to question with 8 ball response
       giphyCommand = /^\/giphy/;
-      botRegex = /^\/weather*/g;
     
 
   if(request.text && botHelp.test(request.text)) {
@@ -173,7 +171,7 @@ function postMessage(response) {
     "text" : botResponse
   };
 
-  //console.log('sending ' + botResponse + ' to ' + botID);
+  console.log('sending ' + botResponse + ' to ' + botID);
 
   botReq = HTTPS.request(options, function(res) {
       if(res.statusCode == 202) {
