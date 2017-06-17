@@ -141,8 +141,9 @@ function respond() {
     
     var date = new Date();
     var currentHour = date.getHours();  
+    var now = currentHour.toString;
       
-    postMessage(currentHour);
+    postMessage(now);
       
     this.res.end();
   }    
