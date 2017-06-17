@@ -41,8 +41,17 @@ function respond() {
     inputs = input.split(/,?\s+/); //split by comma or space
     var first = inputs[0]; //always pull the first one
     postMessage(first);
-    this.res.end();
-  }
+    this.res.end(); 
+      
+    request('http://api.giphy.com/v1/gifs/translate?s=' + first + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
+        if (!error && response.statusCode == 200) { 
+        var id = JSON.parse(body).data[0].id;
+        var giphyURL = 'http://i.giphy.com/' + id + '.gif';
+        postMessage(giphyURL);
+        }
+      });
+      
+      
   else if(request.text && botHello.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Man y'all are pretty swaggy for saying hi to me!");
@@ -164,6 +173,8 @@ function respond() {
     this.res.end();
   }
 }
+
+
 
 function postMessage(response) {
   var botResponse, options, body, botReq;
