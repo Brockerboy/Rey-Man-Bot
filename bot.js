@@ -2,7 +2,7 @@ var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
 var HTTP = require('http');
 
-var tennisCount = 1;
+var tennisCount = 0;
 
 var botID = process.env.BOT_ID;
 
@@ -18,7 +18,7 @@ function respond() {
       botQT = /^\/rey QT?/; //prints QT response
       botKnockKnock = /^\/rey Knock knock/; //prints Who's there?
       botCards = /^\/rey cards/; //Responds to question
-      botTennis = /^\/rey yoyoyoTennis/; //Responds to question
+      botTennis = /^\/rey tennis/; //Responds to question
       bot8Ball = /^\/rey 8ball/; //Responds to question with 8 ball response
 
   if(request.text && botHelp.test(request.text)) {
@@ -29,9 +29,9 @@ function respond() {
                     + '/rey cool - Prints random text face\n'
                     + '/rey joke - Tells a random joke \n'
                     + '/rey motivation - Pumps you up \n'
-                    + '/rey QT? - Responds to question \n'
-                    + '/rey cards? - Responds to question \n'
-                    + '/rey tennis? - Responds to question \n'
+                    + '/rey QT - Responds to question \n'
+                    + '/rey cards - Responds to question \n'
+                    + '/rey tennis - Responds to question \n'
                     + '/rey 8ball "question" - Consult an magic 8 ball to decide your fate to any question \n');
     this.res.end();
   }
@@ -137,11 +137,25 @@ function respond() {
     
   else if(request.text && botTennis.test(request.text)) {
     this.res.writeHead(200);
-    postMessage(tennisCount + " person wants to play tennis! Respond with '/rey tennis' to say if you want to play");
-    tennisCount++;
+    tennisCount++;  
+    if (tennisCount < 2) {
+        postMessage(tennisCount + " person wants to play tennis! Respond with '/rey tennis' to say if you want to play. minimum two votes needed to have a game if your not including me since I have a special mini sized raquet! Vote expires in 15 minutes!");
+    } 
+    else if (tennisCount == 2) {
+        postMessage(tennisCount + " person wants to play tennis! Respond with '/rey tennis' to say if you want to play to make it a doubles game. We have enough to play a game! Vote expires in 15 minutes!");
+    }  
+    else if (tennisCount == 3) {
+        postMessage(tennisCount + " person wants to play tennis! Respond with '/rey tennis' to say if you want to play. One more needed for doubles game. Vote expires in 15 minutes!");
+    }  
+    else if (tennisCount == 4) {
+        postMessage(tennisCount + " person wants to play tennis! Respond with '/rey tennis' to say if you want to play. Man yall have some hard core companionship for getting four people to play! Vote expires in 15 minutes!");
+    }  
+    else {
+        postMessage(tennisCount + " person wants to play tennis! Wow that'ammmmaaaazzzing. Vote expires in 15 minutes!");               
+    }                
       
     setTimeout(function(){
-        tennisCount = 1;
+        tennisCount = 0;
     }, 30000);  
       
     this.res.end();
