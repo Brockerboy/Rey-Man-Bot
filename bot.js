@@ -1,7 +1,6 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
 
-
 var botID = process.env.BOT_ID;
 
 function respond() {
@@ -33,7 +32,7 @@ function respond() {
                     + '/rey 8ball "question" - Consult an magic 8 ball to decide your fate to any question \n');
     this.res.end();
   }
-  else if if(request.text && botRegex.test(request.text)) {
+  else if (request.text && botRegex.test(request.text)) {
     var input = request.text.replace(botRegex, ""); //strip "/gif "
     this.res.writeHead(200);
     input = input.replace(/^\s*/g, ""); //remove beginning whitespace
