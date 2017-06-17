@@ -2,6 +2,8 @@ var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
 var HTTP = require('http');
 
+var tennisCount = 1;
+
 var botID = process.env.BOT_ID;
 
 function respond() {
@@ -135,7 +137,13 @@ function respond() {
     
   else if(request.text && botTennis.test(request.text)) {
     this.res.writeHead(200);
-    postMessage("Hey everyone! We are playing tennis tomorrow at Cosmo around 4:30 to 5. Be there or be square. Let me know if you can go. Or not. You can go either way. But I want you to be there.\n    -Rey");
+    postMessage(tennisCount + " person wants to play tennis! Respond with '/rey tennis' to say if you want to play");
+    tennisCount++;
+      
+    setTimeout(function(){
+        tennisCount = 1;
+    }, 30000);  
+      
     this.res.end();
   } 
     
