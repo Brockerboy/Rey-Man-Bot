@@ -1,6 +1,6 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
-var request = require('request');
+//var request = require('request');
 
 var botID = process.env.BOT_ID;
 
@@ -41,7 +41,7 @@ function respond() {
     inputs = input.split(/,?\s+/); //split by comma or space
     var first = inputs[0]; //always pull the first one
     postMessage(first);
-    this.res.end(); 
+    
       
     request('http://api.giphy.com/v1/gifs/translate?s=' + first + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
         if (!error && response.statusCode == 200) { 
@@ -50,6 +50,8 @@ function respond() {
         postMessage(giphyURL);
         }
       });
+      
+      this.res.end(); 
   }
       
   else if(request.text && botHello.test(request.text)) {
