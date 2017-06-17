@@ -1,10 +1,12 @@
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
+var request = require('request');
 
 var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
+      trigger = request.text.substring(0,7);
       botHello = /^\/rey hello$/; //Says hi in a friendly voice!
       botJoke = /^\/rey joke/; //tells random joke
       botMotivation = /^\/rey motivation/; //prints motivational phrase
@@ -26,7 +28,15 @@ function respond() {
                     + '/rey joke - Tells a random joke \n'
                     + '/rey motivation - Pumps you up \n'
                     + '/rey QT? - Responds to question \n'
+                    + '/rey cards? - Responds to question \n'
+                    + '/rey tennis? - Responds to question \n'
                     + '/rey 8ball "question" - Consult an magic 8 ball to decide your fate to any question \n');
+    this.res.end();
+  }
+  else if (trigger == '/addgif' && request.name != 'gifbot') {
+    searchTerm = request.text.substr(3);
+    this.res.writeHead(200);
+    requestLink(searchTerm);
     this.res.end();
   }
   else if(request.text && botHello.test(request.text)) {
@@ -34,6 +44,7 @@ function respond() {
     postMessage("Man y'all are pretty swaggy for saying hi to me!");
     this.res.end();
   }
+    
   else if(request.text && botJoke.test(request.text)) {
     this.res.writeHead(200);
     
@@ -100,46 +111,63 @@ function respond() {
     postMessage(randomJoke);
     this.res.end();
   } 
+    
   else if(request.text && botMotivation.test(request.text)) {
     this.res.writeHead(200);
     postMessage("https://i.groupme.com/898x555.png.b18ab75a62074b47a764d4d0e36572dc.large");
     this.res.end();
   }  
+    
   else if(request.text && botCards.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Lol I don't know how to play cards. I'll play Go Fish though. I LOVE fish. LITERALLY");
     this.res.end();
   }
+    
   else if(request.text && botTennis.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Hey everyone! We are playing tennis tomorrow at Cosmo around 4:30 to 5. Be there or be square. Let me know if you can go. Or not. You can go either way. But I want you to be there.\n    -Rey");
     this.res.end();
   } 
+    
   else if(request.text && botKnockKnock.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Who's there?");
     this.res.end();
   }  
+    
   else if(request.text && botQT.test(request.text)) {
     this.res.writeHead(200);
     postMessage("QTTTTTTTTTTTTTTTTTTTT");
     this.res.end();
   } 
+    
   else if(request.text && botFlightSchool.test(request.text)) {
     this.res.writeHead(200);
     postMessage("Fantastic!!!\nI graduated summa cum laude!\nI also minored in Hospital Management and also Underwater Basket Weaving.");
     this.res.end();
   } 
+    
   else if(request.text && botCool.test(request.text)) {
     this.res.writeHead(200);
     postMessage(cool());
     this.res.end();
   } 
+    
   else {
     console.log("don't care");
     this.res.writeHead(200);
     this.res.end();
   }
+}
+
+function requestLink(searchTerm) {
+  request('http://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    parsedData = JSON.parse(body),
+    postMessage(parsedData.data.images.downsized.url, botID, parsedData.data.images.downsized.size);
+    }
+  });
 }
 
 function postMessage(response) {
