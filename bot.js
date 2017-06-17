@@ -50,7 +50,7 @@ function respond() {
         postMessage(giphyURL);
         }
       });
-      
+  }
       
   else if(request.text && botHello.test(request.text)) {
     this.res.writeHead(200);
