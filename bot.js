@@ -9,6 +9,7 @@ var botID = process.env.BOT_ID;
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /^\/gif*/g;
+      botTime = /^\/rey time/;
       botHello = /^\/rey hello$/; //Says hi in a friendly voice!
       botJoke = /^\/rey joke/; //tells random joke
       botMotivation = /^\/rey motivation/; //prints motivational phrase
@@ -135,6 +136,17 @@ function respond() {
     this.res.end();
   }
     
+  else if(request.text && botTime.test(request.text)) {
+    this.res.writeHead(200);
+    
+    var date = new Date();
+    var currentHour = date.getHours();  
+      
+    postMessage(currentHour);
+      
+    this.res.end();
+  }    
+    
   else if(request.text && botTennis.test(request.text)) {
     this.res.writeHead(200);
     tennisCount++;  
@@ -156,7 +168,7 @@ function respond() {
       
     setTimeout(function(){
         tennisCount = 0;
-    }, 30000);  
+    }, 900000);  
       
     this.res.end();
   } 
