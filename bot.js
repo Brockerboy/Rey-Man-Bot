@@ -41,17 +41,11 @@ function respond() {
     inputs = input.split(/,?\s+/); //split by comma or space
     var first = inputs[0]; //always pull the first one
     postMessage(first);
+      
+    searchGiphy(first);  
     
       
-    request('http://api.giphy.com/v1/gifs/translate?s=' + first + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
-        if (!error && response.statusCode == 200) { 
-        var id = JSON.parse(body).data[0].id;
-        var giphyURL = 'http://i.giphy.com/' + id + '.gif';
-        postMessage(giphyURL);
-        }
-      });
-      
-      this.res.end(); 
+    this.res.end();  
   }
       
   else if(request.text && botHello.test(request.text)) {
@@ -174,6 +168,33 @@ function respond() {
     this.res.writeHead(200);
     this.res.end();
   }
+}
+
+function searchGiphy(giphyToSearch) {
+  var options = {
+    host: 'api.giphy.com',
+    path: '/v1/gifs/search?q=' + giphyToSearch + '&api_key=dc6zaTOxFJmz'
+  };
+
+  var callback = function(response) {
+    var str = '';
+
+    response.on('data', function(chunck){
+      str += chunck;
+    });
+
+    response.on('end', function() {
+      if (!(str && JSON.parse(str).data[0])) {
+        postMessage('Couldn\'t find a gif 💩');
+      } else {
+        var id = JSON.parse(str).data[0].id;
+        var giphyURL = 'http://i.giphy.com/' + id + '.gif';
+        postMessage(giphyURL);
+      }
+    });
+  };
+
+  HTTP.request(options, callback).end();
 }
 
 
