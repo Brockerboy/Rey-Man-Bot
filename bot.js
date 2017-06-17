@@ -1,23 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Marketplace
-Gist
- @Brockerboy
- Sign out
- Watch 0
-  Star 0
-  Fork 385 Brockerboy/Rey-Man-Bot
-forked from batorobe/bot-tutorial-nodejs-rMA32
- Code  Pull requests 0  Projects 0  Wiki  Settings Insights 
-Tree: 6ee9e72717 Find file Copy pathRey-Man-Bot/bot.js
-6ee9e72  7 days ago
-@Brockerboy Brockerboy Create bot.js
-4 contributors @batorobe @Brockerboy @michaelmph @petemcgrath
-RawBlameHistory      
-182 lines (161 sloc)  5.75 KB
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
 
@@ -199,6 +179,3 @@ function postMessage(response) {
 
 
 exports.respond = respond;
-1
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
