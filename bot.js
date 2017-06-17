@@ -6,7 +6,7 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      trigger = request.text.substring(0,7);
+      botRegex = /^\/gif*/g;
       botHello = /^\/rey hello$/; //Says hi in a friendly voice!
       botJoke = /^\/rey joke/; //tells random joke
       botMotivation = /^\/rey motivation/; //prints motivational phrase
@@ -33,10 +33,14 @@ function respond() {
                     + '/rey 8ball "question" - Consult an magic 8 ball to decide your fate to any question \n');
     this.res.end();
   }
-  else if (trigger == '/addgif' && request.name != 'gifbot') {
-    searchTerm = request.text.substr(3);
+  else if if(request.text && botRegex.test(request.text)) {
+    var input = request.text.replace(botRegex, ""); //strip "/gif "
     this.res.writeHead(200);
-    requestLink(searchTerm);
+    input = input.replace(/^\s*/g, ""); //remove beginning whitespace
+    input = input.replace(/\/*/g, ""); //remove slashes
+    inputs = input.split(/,?\s+/); //split by comma or space
+    var first = inputs[0]; //always pull the first one
+    postMessage(first);
     this.res.end();
   }
   else if(request.text && botHello.test(request.text)) {
@@ -159,15 +163,6 @@ function respond() {
     this.res.writeHead(200);
     this.res.end();
   }
-}
-
-function requestLink(searchTerm) {
-  request('http://api.giphy.com/v1/gifs/translate?s=' + searchTerm + '&api_key=dc6zaTOxFJmzC&rating=r', function (error, response, body) {
-  if (!error && response.statusCode == 200) {
-    parsedData = JSON.parse(body),
-    postMessage(parsedData.data.images.downsized.url, botID, parsedData.data.images.downsized.size);
-    }
-  });
 }
 
 function postMessage(response) {
